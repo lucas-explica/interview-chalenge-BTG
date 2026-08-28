@@ -340,7 +340,7 @@ Challenge Auditor must not implement missing functionality while auditing.
 
 The production implementation must use:
 
-- .NET
+- .NET 10
 - C#
 - ASP.NET Core for the REST API
 
