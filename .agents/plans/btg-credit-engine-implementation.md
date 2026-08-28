@@ -162,14 +162,14 @@ explicit ordered rule data.
 
 **Requirements:** REQ-003, REQ-002, REQ-009.
 
-- [ ] Add ordered cluster rule records containing IDs, names, score/age
+- [x] Add ordered cluster rule records containing IDs, names, score/age
       predicates, debt conditions, base limits, and caps.
-- [ ] Implement a first-match evaluator; keep rule values out of nested
+- [x] Implement a first-match evaluator; keep rule values out of nested
       conditionals and preserve CLUSTER_D as the final catch-all.
-- [ ] Cover CLUSTER_A, B, C, and D, including score 700/500/300 boundaries,
+- [x] Cover CLUSTER_A, B, C, and D, including score 700/500/300 boundaries,
       age 18/25/60/65 boundaries, no-debt behavior, default-debt exclusions,
       and priority overlaps.
-- [ ] Add a focused configuration/data integrity test for rule ordering,
+- [x] Add a focused configuration/data integrity test for rule ordering,
       unique IDs, and required values.
 
 **Dependencies:** Phase 2.

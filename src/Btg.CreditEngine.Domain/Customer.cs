@@ -35,6 +35,12 @@ public static class MarketDebtTypes
         CreditDefault,
         LoanDefault
     };
+
+    public static readonly IReadOnlySet<string> Default = new HashSet<string>(StringComparer.Ordinal)
+    {
+        CreditDefault,
+        LoanDefault
+    };
 }
 
 public static class CustomerRegions
