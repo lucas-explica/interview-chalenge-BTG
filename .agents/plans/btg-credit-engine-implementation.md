@@ -107,16 +107,16 @@ business behavior that belongs in later slices.
 
 **Requirements:** REQ-001, REQ-012.
 
-- [ ] Create the smallest .NET solution with an ASP.NET Core API, a domain
+- [x] Create the smallest .NET solution with an ASP.NET Core API, a domain
       project, unit tests, and integration tests; confirm the selected target
       framework is supported by the available SDK.
-- [ ] Establish project references so domain code is independent of HTTP and
+- [x] Establish project references so domain code is independent of HTTP and
       infrastructure.
-- [ ] Add the repository's single verification command (build plus all tests,
+- [x] Add the repository's single verification command (build plus all tests,
       and any required encoding/documentation checks) and document it.
-- [ ] Add a minimal health/startup path only if useful for integration hosting;
+- [x] Add a minimal health/startup path only if useful for integration hosting;
       do not add persistence, messaging, or unrelated endpoints.
-- [ ] Tests: prove the solution builds, test discovery works, and the API test
+- [x] Tests: prove the solution builds, test discovery works, and the API test
       host can start.
 
 **Dependencies:** none.
