@@ -1,9 +1,3 @@
-
----
-
-# `.agents/skills/implement/SKILL.md`
-
-```markdown
 # Implement
 
 ## Purpose
