@@ -135,15 +135,15 @@ classification.
 
 **Requirements:** REQ-001, REQ-002, REQ-008, REQ-010.
 
-- [ ] Define domain input types for all required customer and location fields,
+- [x] Define domain input types for all required customer and location fields,
       plus the documented debt-type values.
-- [ ] Define validation rules justified by the schema and challenge (required
+- [x] Define validation rules justified by the schema and challenge (required
       fields, score range, valid region/debt values, coherent debt flags and
       collections where the contract requires it); do not invent business
       restrictions not supported by the requirements.
-- [ ] Add API JSON mapping with the exact external field names and a documented
+- [x] Add API JSON mapping with the exact external field names and a documented
       400 error response.
-- [ ] Tests: domain validation for missing, malformed, out-of-range, and valid
+- [x] Tests: domain validation for missing, malformed, out-of-range, and valid
       inputs; integration tests for valid deserialization and invalid/missing
       fields with stable client errors.
 
