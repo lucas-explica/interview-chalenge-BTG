@@ -13,6 +13,74 @@ the workflow.
 Use the role contracts in `.agents/agents/` and the reusable procedures in
 `.agents/skills/`; this document defines sequencing only.
 
+## Continuous Execution Policy
+
+Execution is continuous by default within the authority of the active role.
+
+An agent must not require the human to repeatedly request continuation
+between already-approved steps.
+
+When a deterministic quality gate passes, continue automatically to the
+next pending step owned by the same role.
+
+Progress must remain incremental:
+
+plan slice
+→ implement
+→ test
+→ deterministic gate
+→ update evidence
+→ AI Journey capture when materially relevant
+→ next slice
+
+Do not combine multiple slices into one unstructured implementation.
+Each slice must still satisfy its own quality gate before the next begins.
+
+### Stop Conditions
+
+Continuous execution MUST stop when:
+
+- a human decision is required
+- a requirement ambiguity cannot be resolved from authoritative artifacts
+- an architectural decision requires Architect authority
+- continuing would cross the current agent's responsibility boundary
+- independent review requires a fresh Reviewer context
+- final submission audit requires a fresh Challenge Auditor context
+- deterministic verification exposes a blocker the current role cannot
+  resolve without changing requirements or approved architecture
+- external challenge artifacts are required to make a claim that cannot
+  currently be proven
+
+When stopping, report:
+
+`HANDOFF_REQUIRED: <Human | Architect | Reviewer | Challenge Auditor>`
+
+or:
+
+`BLOCKED: <reason>`
+
+Do not stop merely because one approved implementation slice has completed.
+
+### Implementer Continuous Mode
+
+While operating as Implementer, execute approved implementation-plan slices
+sequentially.
+
+For each slice:
+
+1. implement only that slice
+2. add or update its tests
+3. run its quality gate
+4. update the implementation plan
+5. evaluate whether a material AI Journey entry exists
+6. continue automatically when the gate passes
+
+After all Implementer-owned implementation and deterministic evidence work is
+complete, stop before independent review.
+
+The Implementer must never transition itself into Reviewer or Challenge
+Auditor.
+
 ---
 
 ## Lifecycle
