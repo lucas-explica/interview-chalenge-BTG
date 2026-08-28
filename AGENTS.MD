@@ -336,6 +336,23 @@ Challenge Auditor must not implement missing functionality while auditing.
 
 ---
 
+## Technology Constraints
+
+The production implementation must use:
+
+- .NET
+- C#
+- ASP.NET Core for the REST API
+
+The technology stack is a human decision and must not be changed
+without explicit approval.
+
+Libraries, testing frameworks, project structure, and implementation
+details should be selected proportionally to the challenge requirements.
+
+
+---
+
 ## AI Journey
 
 The evaluator explicitly wants meaningful AI collaboration,
