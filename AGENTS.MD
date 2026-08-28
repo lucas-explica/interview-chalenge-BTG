@@ -127,15 +127,10 @@ normalizing it into a preferred design.
 For meaningful implementation changes:
 
 Architect
-
 → Implementer
-
 → Deterministic Verification
-
 → Reviewer
-
 → Implementer when fixes are required
-
 → Deterministic Verification
 
 Challenge Auditor is a submission-compliance role.
@@ -157,6 +152,35 @@ When tooling allows it:
 
 Reviewer and Challenge Auditor must not rely on the Implementer's
 self-assessment as evidence.
+
+---
+
+## Canonical Challenge Workflow
+
+The canonical delivery workflow for this challenge is:
+
+`.agents/workflows/btg-credit-engine.md`
+
+All agents performing challenge work must read and follow this workflow
+in addition to their role contract and applicable skill.
+
+The workflow owns:
+
+- lifecycle sequencing
+- role handoffs
+- deterministic gates
+- review and remediation loops
+- AI Journey capture rules
+- final submission audit
+
+Agent contracts define responsibility.
+
+Skills define procedures.
+
+Plans define implementation scope.
+
+The workflow defines when and in which order those responsibilities execute.
+
 
 ---
 

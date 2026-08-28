@@ -186,11 +186,11 @@ boundary and overlap cases; no HTTP types appear in the domain project.
 
 **Requirements:** REQ-004, REQ-009.
 
-- [ ] Add ordered category records with category IDs, multipliers, and the
+- [x] Add ordered category records with category IDs, multipliers, and the
       exact keyword lists from the challenge.
-- [ ] Implement case-insensitive substring matching anywhere in the title and
+- [x] Implement case-insensitive substring matching anywhere in the title and
       return the first category match; use OTHER when no keyword matches.
-- [ ] Tests: one path per category, no-match fallback, mixed case, keyword in
+- [x] Tests: one path per category, no-match fallback, mixed case, keyword in
       the middle of a title, executive-vs-senior overlap, and any other
       priority overlap exposed by the keyword lists.
 
