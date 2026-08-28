@@ -128,7 +128,30 @@ Credit limit calculation: base formula, penalty application, cap enforcement, an
 
 > `POST /customers/classify` with valid input returns correct output contract 
 
-> `POST /customers/classify` with invalid or missing fields returns appropriate error responses All 6 sample customers from `expected-output.json` produce the exact expected output 
+> `POST /customers/classify` with invalid or missing fields returns appropriate error responses All 6 sample customers from `expected-output.json` produce the exact expected output
+
+## Local implementation evidence
+
+The following evidence applies to the current repository implementation. The
+official six-customer fixture and `expected-output.json` were not provided, so
+their exact-output comparison remains unavailable and is not claimed here.
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| REQ-001 | VERIFIED | `src/Btg.CreditEngine.Api/Program.cs`; API integration tests; stateless request handling |
+| REQ-002 | VERIFIED | `src/Btg.CreditEngine.Domain/Customer.cs`, `src/Btg.CreditEngine.Api/CustomerRequest.cs` |
+| REQ-003 | VERIFIED | `src/Btg.CreditEngine.Domain/ClusterRules.cs`; `ClusterClassificationTests` |
+| REQ-004 | VERIFIED | `src/Btg.CreditEngine.Domain/JobRules.cs`; `JobClassificationTests` |
+| REQ-005 | VERIFIED | `src/Btg.CreditEngine.Domain/FinancialRules.cs`; income matrix tests |
+| REQ-006 | VERIFIED | `CreditEngine` calculation and rounding tests; API result tests |
+| REQ-007 | VERIFIED | penalty rule and penalty calculation tests |
+| REQ-008 | VERIFIED | `Validation.cs`; API invalid-body and invalid-field tests |
+| REQ-009 | VERIFIED | domain test projects covering boundaries, priority, formula, cap, rounding and denial |
+| REQ-010 | VERIFIED | `CustomerEndpointTests` full request/response tests |
+| REQ-011 | MISSING | Official six customers and `expected-output.json` are unavailable in this repository |
+| REQ-012 | VERIFIED | `dotnet test Btg.CreditEngine.sln --configuration Release` |
+| REQ-013 | PARTIAL | README and AI Journey exist; final documentation consolidation is ongoing |
+| REQ-014 | MISSING | Independent technical review and challenge audit have not yet run |
 
 <mark>Your test suite must be runnable with a single command (e.g.</mark> `pytest` <mark>,</mark> `dotnet test` <mark>,</mark> `npm test` <mark>).</mark> 
 

@@ -28,6 +28,29 @@ Invalid JSON or input returns HTTP 400 with this stable shape:
 }
 ```
 
+For a valid request, the response preserves all input fields and adds
+`cluster_id`, `cluster_name`, `job_category`, `monthly_income`, `approved`,
+and `approved_limit`. The current deterministic example is:
+
+```json
+{
+  "id": "customer-1",
+  "name": "Ana Silva",
+  "age": 30,
+  "score": 700,
+  "has_market_debt": false,
+  "market_debt_types": [],
+  "location": { "city": "São Paulo", "state": "SP", "region": "Sudeste" },
+  "job_title": "Engineer",
+  "cluster_id": "CLUSTER_A",
+  "cluster_name": "Diamond",
+  "job_category": "MID_PROFESSIONAL",
+  "monthly_income": 12000,
+  "approved": true,
+  "approved_limit": 50000
+}
+```
+
 ## Verification
 
 Run the complete deterministic build and test suite from the repository root:

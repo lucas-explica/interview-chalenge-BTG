@@ -29,7 +29,8 @@ app.MapPost("/customers/classify", async (HttpRequest httpRequest) =>
             validation.Errors.Select(error => new ValidationErrorResponse(error.Field, error.Message)).ToArray()));
     }
 
-    return Results.Ok(request);
+    var evaluation = CreditEngine.Evaluate(request!.ToDomain());
+    return Results.Ok(CustomerResponse.From(request!, evaluation));
 });
 
 app.Run();

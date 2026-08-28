@@ -32,6 +32,39 @@ public sealed class CustomerEndpointTests : IClassFixture<WebApplicationFactory<
         Assert.Equal("SP", root.GetProperty("location").GetProperty("state").GetString());
         Assert.Equal("Sudeste", root.GetProperty("location").GetProperty("region").GetString());
         Assert.Equal("Engineer", root.GetProperty("job_title").GetString());
+        Assert.Equal("CLUSTER_A", root.GetProperty("cluster_id").GetString());
+        Assert.Equal("Diamond", root.GetProperty("cluster_name").GetString());
+        Assert.Equal("MID_PROFESSIONAL", root.GetProperty("job_category").GetString());
+        Assert.Equal(12_000m, root.GetProperty("monthly_income").GetDecimal());
+        Assert.True(root.GetProperty("approved").GetBoolean());
+        Assert.Equal(50_000m, root.GetProperty("approved_limit").GetDecimal());
+    }
+
+    [Fact]
+    public async Task PenalizedAndDeniedRequestsReturnTheirOwnDeterministicResults()
+    {
+        using var penalizedResponse = await client.PostAsJsonAsync("/customers/classify", Customer(
+            score: 500,
+            age: 30,
+            hasMarketDebt: true,
+            debtTypes: ["credit_default"],
+            jobTitle: "Senior Manager"));
+        using var deniedResponse = await client.PostAsJsonAsync("/customers/classify", Customer(
+            score: 100,
+            age: 30,
+            jobTitle: "CEO"));
+        using var penalized = JsonDocument.Parse(await penalizedResponse.Content.ReadAsStringAsync());
+        using var denied = JsonDocument.Parse(await deniedResponse.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, penalizedResponse.StatusCode);
+        Assert.Equal("CLUSTER_C", penalized.RootElement.GetProperty("cluster_id").GetString());
+        Assert.Equal(3_800m, penalized.RootElement.GetProperty("approved_limit").GetDecimal());
+        Assert.True(penalized.RootElement.GetProperty("approved").GetBoolean());
+
+        Assert.Equal(HttpStatusCode.OK, deniedResponse.StatusCode);
+        Assert.Equal("CLUSTER_D", denied.RootElement.GetProperty("cluster_id").GetString());
+        Assert.False(denied.RootElement.GetProperty("approved").GetBoolean());
+        Assert.Equal(0m, denied.RootElement.GetProperty("approved_limit").GetDecimal());
     }
 
     [Fact]
@@ -78,5 +111,22 @@ public sealed class CustomerEndpointTests : IClassFixture<WebApplicationFactory<
         market_debt_types = Array.Empty<string>(),
         location = new { city = "São Paulo", state = "SP", region = "Sudeste" },
         job_title = "Engineer"
+    };
+
+    private static object Customer(
+        int score,
+        int age,
+        bool hasMarketDebt = false,
+        string[]? debtTypes = null,
+        string jobTitle = "Engineer") => new
+    {
+        id = "customer-1",
+        name = "Ana Silva",
+        age,
+        score,
+        has_market_debt = hasMarketDebt,
+        market_debt_types = debtTypes ?? [],
+        location = new { city = "São Paulo", state = "SP", region = "Sudeste" },
+        job_title = jobTitle
     };
 }

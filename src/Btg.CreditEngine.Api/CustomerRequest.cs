@@ -63,3 +63,66 @@ public sealed record ErrorResponse(
 public sealed record ValidationErrorResponse(
     [property: JsonPropertyName("field")] string Field,
     [property: JsonPropertyName("message")] string Message);
+
+public sealed record CustomerResponse
+{
+    [JsonPropertyName("id")]
+    public required string Id { get; init; }
+
+    [JsonPropertyName("name")]
+    public required string Name { get; init; }
+
+    [JsonPropertyName("age")]
+    public required int Age { get; init; }
+
+    [JsonPropertyName("score")]
+    public required int Score { get; init; }
+
+    [JsonPropertyName("has_market_debt")]
+    public required bool HasMarketDebt { get; init; }
+
+    [JsonPropertyName("market_debt_types")]
+    public required IReadOnlyList<string> MarketDebtTypes { get; init; }
+
+    [JsonPropertyName("location")]
+    public required LocationRequest Location { get; init; }
+
+    [JsonPropertyName("job_title")]
+    public required string JobTitle { get; init; }
+
+    [JsonPropertyName("cluster_id")]
+    public required string ClusterId { get; init; }
+
+    [JsonPropertyName("cluster_name")]
+    public required string ClusterName { get; init; }
+
+    [JsonPropertyName("job_category")]
+    public required string JobCategory { get; init; }
+
+    [JsonPropertyName("monthly_income")]
+    public required decimal MonthlyIncome { get; init; }
+
+    [JsonPropertyName("approved")]
+    public required bool Approved { get; init; }
+
+    [JsonPropertyName("approved_limit")]
+    public required decimal ApprovedLimit { get; init; }
+
+    public static CustomerResponse From(CustomerRequest request, CreditEvaluation evaluation) => new()
+    {
+        Id = request.Id!,
+        Name = request.Name!,
+        Age = request.Age!.Value,
+        Score = request.Score!.Value,
+        HasMarketDebt = request.HasMarketDebt!.Value,
+        MarketDebtTypes = request.MarketDebtTypes!,
+        Location = request.Location!,
+        JobTitle = request.JobTitle!,
+        ClusterId = evaluation.Cluster.Id,
+        ClusterName = evaluation.Cluster.Name,
+        JobCategory = evaluation.Job.Id,
+        MonthlyIncome = evaluation.MonthlyIncome,
+        Approved = evaluation.Approved,
+        ApprovedLimit = evaluation.ApprovedLimit
+    };
+}

@@ -50,3 +50,14 @@ Describe the approach actually adopted.
 ## Prompt: <next important interaction>
 
 Repeat the same structure.
+## Decision: default-debt penalty interaction
+
+**What happened:** While adding financial tests, an initial expectation placed
+a defaulted customer in `CLUSTER_B`. The cluster rule explicitly excludes
+`credit_default` and `loan_default`, so the actual first matching cluster is
+`CLUSTER_C`.
+
+**Final solution:** The implementation preserves cluster priority and applies
+the penalty only after the resulting cluster and job multiplier are known.
+The regression test verifies `CLUSTER_C` senior income and a rounded limit of
+R$ 3,800 for a defaulted customer.

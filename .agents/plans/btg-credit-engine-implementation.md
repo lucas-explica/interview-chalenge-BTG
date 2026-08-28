@@ -210,20 +210,20 @@ classification.
 
 **Requirements:** REQ-005, REQ-006, REQ-007, REQ-009.
 
-- [ ] Add the complete cluster × job-category monthly income matrix as
+- [x] Add the complete cluster × job-category monthly income matrix as
       structured data and test every combination, including all CLUSTER_D
       zeros.
-- [ ] Add the penalty rule data and apply the default-debt penalty after the
+- [x] Add the penalty rule data and apply the default-debt penalty after the
       job multiplier and before cap enforcement.
-- [ ] Implement the formula with decimal arithmetic, cap enforcement, the
+- [x] Implement the formula with decimal arithmetic, cap enforcement, the
       explicit nearest-R$100 helper, and CLUSTER_D's forced
       approved=false, approved_limit=0 result.
-- [ ] Test base calculations, penalty trigger/non-trigger, cap below the
+- [x] Test base calculations, penalty trigger/non-trigger, cap below the
       uncapped value, values already on a hundred, values on both sides of a
       hundred boundary, and denial. Add a documented decision/ADR before
       testing exact half-hundred ties if the challenge owner confirms a tie
       convention is required.
-- [ ] Verify that income is a lookup result and is not accidentally recomputed
+- [x] Verify that income is a lookup result and is not accidentally recomputed
       from the credit limit.
 
 **Dependencies:** Phases 3 and 4.
@@ -243,15 +243,15 @@ endpoint.
 **Requirements:** REQ-001, REQ-002, REQ-005, REQ-006, REQ-007, REQ-008,
 REQ-010.
 
-- [ ] Add POST /customers/classify and map the validated request to the domain
+- [x] Add POST /customers/classify and map the validated request to the domain
       service exactly once.
-- [ ] Define the enriched response fields from the challenge output contract;
+- [x] Define the enriched response fields from the challenge output contract;
       preserve input fields and use the required names/types for cluster, job
       category, income, approval, limit, and any other documented outputs.
-- [ ] Add integration tests for a representative approved result, a penalized
+- [x] Add integration tests for a representative approved result, a penalized
       result, a cap-limited result, and CLUSTER_D denial; assert status,
       response shape, values, and no state carried between requests.
-- [ ] Update API documentation with request/response examples generated from
+- [x] Update API documentation with request/response examples generated from
       implemented behavior, not fabricated official samples.
 
 **Dependencies:** Phases 2–5.
@@ -269,19 +269,20 @@ make every requirement traceable to evidence.
 
 **Requirements:** REQ-009, REQ-010, REQ-011, REQ-012, REQ-013.
 
-- [ ] If the official six sample customers and expected-output.json become
+- [x] If the official six sample customers and expected-output.json become
       available, add them as test fixtures and compare the complete serialized
-      outputs exactly, including numeric formatting and field presence.
-- [ ] If they remain unavailable, record the external gap prominently in the
+      outputs exactly, including numeric formatting and field presence. (The
+      artifacts remain unavailable in this repository.)
+- [x] If they remain unavailable, record the external gap prominently in the
       requirements/evidence documentation and report that REQ-011 cannot be
       verified; do not create replacement expected outputs or claim readiness
       on that basis.
-- [ ] Run the complete one-command verification from a clean repository state,
+- [x] Run the complete one-command verification from a clean repository state,
       including encoding checks required by AGENTS.md where applicable.
-- [ ] Update docs/requirements.md with implementation/test/configuration
+- [x] Update docs/requirements.md with implementation/test/configuration
       evidence links and statuses; do not mark evidence as verified before it
       exists.
-- [ ] Complete API/project documentation and record only real, material AI
+- [x] Complete API/project documentation and record only real, material AI
       decisions, corrections, and lessons in ai-journey/.
 
 **Dependencies:** Phase 6; official artifact availability is external and not
