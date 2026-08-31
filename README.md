@@ -1,23 +1,43 @@
 # BTG Credit Engine
 
-This repository contains the BTG Pactual Credit Engine REST API. The
-implementation is being delivered in small phases defined in
-`.agents/plans/btg-credit-engine-implementation.md`.
+ASP.NET Core REST API that classifies customers, estimates monthly income, and
+calculates deterministic credit limits. Domain rules are independent from the
+HTTP adapter and represented as structured rule data.
 
-## Implementation status
+## Prerequisites and setup
 
-The solution contains an ASP.NET Core API host, an HTTP-independent domain
-project, and unit/integration test projects. The implemented API classifies
-customers, estimates monthly income, calculates deterministic credit limits,
-and exposes `/health` for host checks.
+- .NET 10 SDK
+- A shell capable of running the commands below
 
-## Customer validation
+From the repository root, restore and build the solution:
 
-`POST /customers/classify` now accepts the documented customer shape using
-`snake_case` JSON names. This phase validates required fields, score range,
-Brazilian region and debt-type vocabulary, state abbreviation shape, and
-consistency between `has_market_debt` and `market_debt_types`. A valid request
-is classified and returned with the complete enriched response described below.
+```text
+dotnet restore Btg.CreditEngine.sln
+dotnet build Btg.CreditEngine.sln --configuration Release
+```
+
+## Run the API
+
+```text
+dotnet run --project src/Btg.CreditEngine.Api --launch-profile http
+```
+
+The HTTP profile listens at `http://localhost:5231`. Stop the process with
+`Ctrl+C` when finished.
+
+## Classify a customer
+
+Call `POST http://localhost:5231/customers/classify` with a JSON customer using
+the documented `snake_case` field names. For example:
+
+```bash
+curl -X POST http://localhost:5231/customers/classify \
+  -H "Content-Type: application/json" \
+  -d '{"id":"customer-1","name":"Ana Silva","age":30,"score":700,"has_market_debt":false,"market_debt_types":[],"location":{"city":"São Paulo","state":"SP","region":"Sudeste"},"job_title":"Engineer"}'
+```
+
+The response preserves the input and adds `cluster_id`, `cluster_name`,
+`job_category`, `monthly_income`, `approved`, and `approved_limit`.
 
 Invalid JSON or input returns HTTP 400 with this stable shape:
 
@@ -53,7 +73,7 @@ and `approved_limit`. The current deterministic example is:
 
 ## Verification
 
-Run the complete deterministic build and test suite from the repository root:
+Run the complete test suite from the repository root with one command:
 
 ```text
 dotnet test Btg.CreditEngine.sln --configuration Release

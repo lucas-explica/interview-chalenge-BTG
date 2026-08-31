@@ -6,28 +6,12 @@ The goal was not to maximize generated code.
 The goal was to use AI where it improved reasoning speed while keeping
 requirements, business rules, and verification under deterministic control.
 
-## Tools
-
-This section will be updated with the tools actually used during development.
-
-Examples may include:
-
-- OpenAI Codex — implementation, exploration, review
-- ChatGPT — architecture discussion and requirement analysis
-- other coding assistants when useful for independent review
-
 ## How AI Was Used
 
-AI may assist with:
-
-- requirement analysis
-- architecture alternatives
-- implementation planning
-- code generation
-- edge-case discovery
-- test generation
-- independent review
-- challenge compliance auditing
+An AI coding assistant was used for requirement analysis, implementation
+exploration, test design, and review of rule interactions. The selected
+material interaction is recorded in `prompts.md`; routine autocomplete and
+boilerplate are omitted.
 
 ## How AI Was Controlled
 

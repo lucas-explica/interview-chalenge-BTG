@@ -150,7 +150,7 @@ their exact-output comparison remains unavailable and is not claimed here.
 | REQ-010 | VERIFIED | `CustomerEndpointTests` full request/response tests |
 | REQ-011 | MISSING | Official six customers and `expected-output.json` are unavailable in this repository |
 | REQ-012 | VERIFIED | `dotnet test Btg.CreditEngine.sln --configuration Release` |
-| REQ-013 | PARTIAL | README and AI Journey exist; final documentation consolidation is ongoing |
+| REQ-013 | VERIFIED | README documents prerequisites, restore/build, API startup, endpoint usage, response shape, and one-command tests; `ai-journey/` contains only recorded interactions and lessons without template placeholders |
 | REQ-014 | MISSING | Independent technical review and challenge audit have not yet run |
 
 <mark>Your test suite must be runnable with a single command (e.g.</mark> `pytest` <mark>,</mark> `dotnet test` <mark>,</mark> `npm test` <mark>).</mark> 
@@ -233,4 +233,3 @@ I asked for a data-driven approach instead and got a cleaner result.
 - `Use AI earlier in the design phase, not just for implementation` 
 
 <mark>The depth and honesty of this documentation matters as much as the code itself.</mark> 
-
