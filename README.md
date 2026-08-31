@@ -4,12 +4,12 @@ This repository contains the BTG Pactual Credit Engine REST API. The
 implementation is being delivered in small phases defined in
 `.agents/plans/btg-credit-engine-implementation.md`.
 
-## Phase 1
+## Implementation status
 
-The solution currently contains the ASP.NET Core API host, an HTTP-independent
-domain project, and unit/integration test projects. Business behavior is not
-implemented in this bootstrap phase. The API exposes only `/health` so the
-integration test can prove that the host starts.
+The solution contains an ASP.NET Core API host, an HTTP-independent domain
+project, and unit/integration test projects. The implemented API classifies
+customers, estimates monthly income, calculates deterministic credit limits,
+and exposes `/health` for host checks.
 
 ## Customer validation
 
@@ -17,7 +17,7 @@ integration test can prove that the host starts.
 `snake_case` JSON names. This phase validates required fields, score range,
 Brazilian region and debt-type vocabulary, state abbreviation shape, and
 consistency between `has_market_debt` and `market_debt_types`. A valid request
-is echoed unchanged until the classification phases add enriched fields.
+is classified and returned with the complete enriched response described below.
 
 Invalid JSON or input returns HTTP 400 with this stable shape:
 

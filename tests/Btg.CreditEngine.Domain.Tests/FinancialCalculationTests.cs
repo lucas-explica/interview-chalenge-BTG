@@ -16,6 +16,54 @@ public sealed class FinancialCalculationTests
     }
 
     [Fact]
+    public void IncomeMatrixContainsTheChallengeValuesForEveryCombination()
+    {
+        var expected = new Dictionary<string, IReadOnlyDictionary<string, decimal>>
+        {
+            ["CLUSTER_A"] = new Dictionary<string, decimal>
+            {
+                ["EXECUTIVE"] = 30_000m,
+                ["SENIOR_PROFESSIONAL"] = 20_000m,
+                ["MID_PROFESSIONAL"] = 12_000m,
+                ["JUNIOR_PROFESSIONAL"] = 8_000m,
+                ["OTHER"] = 10_000m
+            },
+            ["CLUSTER_B"] = new Dictionary<string, decimal>
+            {
+                ["EXECUTIVE"] = 20_000m,
+                ["SENIOR_PROFESSIONAL"] = 15_000m,
+                ["MID_PROFESSIONAL"] = 8_000m,
+                ["JUNIOR_PROFESSIONAL"] = 5_000m,
+                ["OTHER"] = 6_500m
+            },
+            ["CLUSTER_C"] = new Dictionary<string, decimal>
+            {
+                ["EXECUTIVE"] = 10_000m,
+                ["SENIOR_PROFESSIONAL"] = 7_000m,
+                ["MID_PROFESSIONAL"] = 5_000m,
+                ["JUNIOR_PROFESSIONAL"] = 3_000m,
+                ["OTHER"] = 4_000m
+            },
+            ["CLUSTER_D"] = new Dictionary<string, decimal>
+            {
+                ["EXECUTIVE"] = 0m,
+                ["SENIOR_PROFESSIONAL"] = 0m,
+                ["MID_PROFESSIONAL"] = 0m,
+                ["JUNIOR_PROFESSIONAL"] = 0m,
+                ["OTHER"] = 0m
+            }
+        };
+
+        foreach (var (clusterId, expectedIncome) in expected)
+        {
+            foreach (var (jobCategory, expectedValue) in expectedIncome)
+            {
+                Assert.Equal(expectedValue, FinancialRules.MonthlyIncome[clusterId][jobCategory]);
+            }
+        }
+    }
+
+    [Fact]
     public void BaseLimitUsesJobMultiplierAndRoundsToHundred()
     {
         var result = CreditEngine.Evaluate(Customer("CLUSTER_A", "Engineer", 800, 30));
