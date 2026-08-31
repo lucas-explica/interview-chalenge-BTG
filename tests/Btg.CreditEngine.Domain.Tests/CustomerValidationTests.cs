@@ -71,6 +71,18 @@ public sealed class CustomerValidationTests
         Assert.True(result.IsValid);
     }
 
+    [Fact]
+    public void DuplicateAllowedDebtTypesAreValid()
+    {
+        var result = CustomerValidator.Validate(ValidCustomer() with
+        {
+            HasMarketDebt = true,
+            MarketDebtTypes = [MarketDebtTypes.Mortgage, MarketDebtTypes.Mortgage]
+        });
+
+        Assert.True(result.IsValid);
+    }
+
     private static CustomerInput ValidCustomer() => new()
     {
         Id = "customer-1",

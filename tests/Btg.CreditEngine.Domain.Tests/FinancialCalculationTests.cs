@@ -85,6 +85,22 @@ public sealed class FinancialCalculationTests
     }
 
     [Fact]
+    public void DuplicateDefaultDebtTypesApplyThePenaltyOnlyOnce()
+    {
+        var result = CreditEngine.Evaluate(Customer(
+            "CLUSTER_C",
+            "Senior Manager",
+            500,
+            30,
+            true,
+            [MarketDebtTypes.CreditDefault, MarketDebtTypes.CreditDefault]));
+
+        Assert.Equal("CLUSTER_C", result.Cluster.Id);
+        Assert.Equal("SENIOR_PROFESSIONAL", result.Job.Id);
+        Assert.Equal(3_800m, result.ApprovedLimit);
+    }
+
+    [Fact]
     public void CapIsAppliedBeforeRounding()
     {
         var result = CreditEngine.Evaluate(Customer("CLUSTER_B", "CEO", 500, 30, true, [MarketDebtTypes.Mortgage]));

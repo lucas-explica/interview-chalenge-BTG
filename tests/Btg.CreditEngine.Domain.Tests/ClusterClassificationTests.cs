@@ -67,6 +67,21 @@ public sealed class ClusterClassificationTests
     }
 
     [Fact]
+    public void DuplicateDebtTypesDoNotChangeClassification()
+    {
+        var withoutDuplicates = ClusterClassifier.Classify(Customer(
+            score: 500,
+            hasMarketDebt: true,
+            debtTypes: [MarketDebtTypes.Mortgage]));
+        var withDuplicates = ClusterClassifier.Classify(Customer(
+            score: 500,
+            hasMarketDebt: true,
+            debtTypes: [MarketDebtTypes.Mortgage, MarketDebtTypes.Mortgage]));
+
+        Assert.Equal(withoutDuplicates, withDuplicates);
+    }
+
+    [Fact]
     public void CatchAllClassifiesLowScoreCustomersAsBronze()
     {
         var assignment = ClusterClassifier.Classify(Customer(score: 0, age: 0));
