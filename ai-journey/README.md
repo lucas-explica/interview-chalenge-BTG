@@ -6,11 +6,11 @@ The goal was not to maximize generated code.
 The goal was to use AI where it improved reasoning speed while keeping
 requirements, business rules, and verification under deterministic control.
 
-## How AI Was Used
+## Tool
 
-An AI coding assistant was used for requirement analysis, implementation
-exploration, test design, and review of rule interactions. The selected
-material interaction is recorded in `prompts.md`; routine autocomplete and
+Codex was used for requirement analysis, implementation exploration, test
+design, and review of rule interactions. Only material interactions supported
+by repository files or history are included; routine autocomplete and
 boilerplate are omitted.
 
 ## How AI Was Controlled

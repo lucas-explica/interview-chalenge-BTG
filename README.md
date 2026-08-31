@@ -36,6 +36,13 @@ curl -X POST http://localhost:5231/customers/classify \
   -d '{"id":"customer-1","name":"Ana Silva","age":30,"score":700,"has_market_debt":false,"market_debt_types":[],"location":{"city":"São Paulo","state":"SP","region":"Sudeste"},"job_title":"Engineer"}'
 ```
 
+PowerShell equivalent:
+
+```powershell
+$body = '{"id":"customer-1","name":"Ana Silva","age":30,"score":700,"has_market_debt":false,"market_debt_types":[],"location":{"city":"São Paulo","state":"SP","region":"Sudeste"},"job_title":"Engineer"}'
+Invoke-RestMethod -Method Post -Uri http://localhost:5231/customers/classify -ContentType 'application/json' -Body $body
+```
+
 The response preserves the input and adds `cluster_id`, `cluster_name`,
 `job_category`, `monthly_income`, `approved`, and `approved_limit`.
 
