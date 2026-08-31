@@ -303,7 +303,7 @@ boundaries.
 
 **Requirements:** REQ-013, REQ-014 and all prior requirements.
 
-- [ ] Have a fresh-context Reviewer inspect requirements, ADRs, plan, source,
+- [x] Have a fresh-context Reviewer inspect requirements, ADRs, plan, source,
       tests, configuration, and verification output; require findings ordered
       by severity and an exact PASS or CHANGES_REQUIRED decision.
 - [ ] If changes are required, implement only accepted findings, add/regress

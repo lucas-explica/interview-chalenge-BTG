@@ -151,7 +151,7 @@ their exact-output comparison remains unavailable and is not claimed here.
 | REQ-011 | MISSING | Official six customers and `expected-output.json` are unavailable in this repository |
 | REQ-012 | VERIFIED | `dotnet test Btg.CreditEngine.sln --configuration Release` |
 | REQ-013 | VERIFIED | README documents prerequisites, restore/build, API startup, Bash and PowerShell endpoint usage, response shape, and one-command tests; `ai-journey/` identifies Codex and records two supported material interactions with decisions, corrections, lessons, and concrete repository evidence |
-| REQ-014 | MISSING | Independent technical review and challenge audit have not yet run |
+| REQ-014 | PARTIAL | [Persisted independent Reviewer PASS](reviews/independent-review.md) for commit `98cdf05`; the final Challenge Audit remains pending |
 
 <mark>Your test suite must be runnable with a single command (e.g.</mark> `pytest` <mark>,</mark> `dotnet test` <mark>,</mark> `npm test` <mark>).</mark> 
 
