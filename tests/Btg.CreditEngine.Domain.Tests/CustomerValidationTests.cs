@@ -48,7 +48,7 @@ public sealed class CustomerValidationTests
     }
 
     [Fact]
-    public void DebtFlagAndCollectionMustBeCoherent()
+    public void DebtFlagAndCollectionAreValidatedIndependentlyWhenFlagIsFalse()
     {
         var result = CustomerValidator.Validate(ValidCustomer() with
         {
@@ -56,7 +56,19 @@ public sealed class CustomerValidationTests
             MarketDebtTypes = [MarketDebtTypes.Mortgage]
         });
 
-        Assert.Contains(result.Errors, error => error.Field == "has_market_debt");
+        Assert.True(result.IsValid);
+    }
+
+    [Fact]
+    public void DebtFlagAndCollectionAreValidatedIndependentlyWhenFlagIsTrue()
+    {
+        var result = CustomerValidator.Validate(ValidCustomer() with
+        {
+            HasMarketDebt = true,
+            MarketDebtTypes = []
+        });
+
+        Assert.True(result.IsValid);
     }
 
     private static CustomerInput ValidCustomer() => new()

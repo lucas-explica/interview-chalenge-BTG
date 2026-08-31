@@ -54,6 +54,19 @@ public sealed class ClusterClassificationTests
     }
 
     [Fact]
+    public void ClusterRulesUseDebtFlagIndependentlyFromDebtTypeCollection()
+    {
+        Assert.Equal("CLUSTER_A", ClusterClassifier.Classify(Customer(
+            score: 700,
+            hasMarketDebt: false,
+            debtTypes: [MarketDebtTypes.Mortgage])).Id);
+        Assert.Equal("CLUSTER_B", ClusterClassifier.Classify(Customer(
+            score: 500,
+            hasMarketDebt: true,
+            debtTypes: [])).Id);
+    }
+
+    [Fact]
     public void CatchAllClassifiesLowScoreCustomersAsBronze()
     {
         var assignment = ClusterClassifier.Classify(Customer(score: 0, age: 0));

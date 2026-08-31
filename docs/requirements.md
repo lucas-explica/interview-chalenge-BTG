@@ -145,7 +145,7 @@ their exact-output comparison remains unavailable and is not claimed here.
 | REQ-005 | VERIFIED | `src/Btg.CreditEngine.Domain/FinancialRules.cs`; income matrix tests |
 | REQ-006 | VERIFIED | `CreditEngine` calculation and rounding tests; API result tests |
 | REQ-007 | VERIFIED | penalty rule and penalty calculation tests |
-| REQ-008 | VERIFIED | `Validation.cs`; API invalid-body and invalid-field tests |
+| REQ-008 | VERIFIED | `Validation.cs`; API invalid-body and invalid-field tests; `CustomerValidationTests` proves debt flag and debt-type collection are validated independently |
 | REQ-009 | VERIFIED | domain test projects covering boundaries, priority, formula, cap, rounding and denial |
 | REQ-010 | VERIFIED | `CustomerEndpointTests` full request/response tests |
 | REQ-011 | MISSING | Official six customers and `expected-output.json` are unavailable in this repository |

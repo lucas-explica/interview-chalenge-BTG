@@ -34,8 +34,33 @@ case-insensitive, anywhere-in-title matching semantics and surface the
 COO/Coordinator overlap rather than inventing a token-boundary rule.
 
 **Evidence:** `src/Btg.CreditEngine.Domain/JobRules.cs` contains both keywords
-and `JobClassifier` implements ordered substring matching; commit `45e99a4`
-introduced that rule data and classifier.
+and `JobClassifier` implements ordered substring matching. The executable
+decision is covered by `JobClassificationTests.CoordinatorFollowsLiteralSubstringPriority`.
+
+---
+
+## Interaction: unsupported debt consistency validation
+
+**Tool:** Codex.
+
+**Observation:** External staff-level review identified that the validator
+had imposed consistency between `has_market_debt` and `market_debt_types`,
+including a uniqueness requirement, although the challenge defines the fields
+separately and consumes them independently in different rules.
+
+**Challenge evidence:** The cluster A rule reads `has_market_debt`, while the
+cluster B exclusion and default-debt penalty read `market_debt_types`.
+
+**Implementation conflict:** The extra validator errors rejected combinations
+that the challenge does not prohibit.
+
+**Correction:** Removed only the unsupported consistency and duplicate-entry
+rejections; required fields, declared values, score range, region, and debt
+type validation remain.
+
+**Regression evidence:** `CustomerValidationTests` proves both
+`has_market_debt=false` with `mortgage` and `has_market_debt=true` with an
+empty list are valid, while cluster evaluation remains covered separately.
 
 ---
 

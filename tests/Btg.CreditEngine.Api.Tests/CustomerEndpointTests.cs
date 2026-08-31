@@ -68,6 +68,26 @@ public sealed class CustomerEndpointTests : IClassFixture<WebApplicationFactory<
     }
 
     [Fact]
+    public async Task DebtFlagAndDebtTypesAreAcceptedAsIndependentFields()
+    {
+        using var flagFalseResponse = await client.PostAsJsonAsync("/customers/classify", Customer(
+            score: 700,
+            age: 30,
+            debtTypes: ["mortgage"]));
+        using var flagTrueResponse = await client.PostAsJsonAsync("/customers/classify", Customer(
+            score: 500,
+            age: 30,
+            hasMarketDebt: true));
+        using var flagFalse = JsonDocument.Parse(await flagFalseResponse.Content.ReadAsStringAsync());
+        using var flagTrue = JsonDocument.Parse(await flagTrueResponse.Content.ReadAsStringAsync());
+
+        Assert.Equal(HttpStatusCode.OK, flagFalseResponse.StatusCode);
+        Assert.Equal("CLUSTER_A", flagFalse.RootElement.GetProperty("cluster_id").GetString());
+        Assert.Equal(HttpStatusCode.OK, flagTrueResponse.StatusCode);
+        Assert.Equal("CLUSTER_B", flagTrue.RootElement.GetProperty("cluster_id").GetString());
+    }
+
+    [Fact]
     public async Task MissingBodyReturnsStableValidationError()
     {
         using var response = await client.PostAsync("/customers/classify", content: null);

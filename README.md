@@ -55,6 +55,9 @@ Invalid JSON or input returns HTTP 400 with this stable shape:
 }
 ```
 
+See [docs/architecture.md](docs/architecture.md) for the implemented
+architecture and its trade-offs.
+
 For a valid request, the response preserves all input fields and adds
 `cluster_id`, `cluster_name`, `job_category`, `monthly_income`, `approved`,
 and `approved_limit`. The current deterministic example is:

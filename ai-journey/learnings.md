@@ -26,6 +26,11 @@
 - Ask for priority, boundary, and ambiguity cases explicitly before accepting
   an implementation approach.
 
+- Treat validation consistency checks as business rules requiring direct
+  challenge evidence. The staff-level review found that debt flag/list
+  coherence and uniqueness had been invented; removing them and adding
+  independent-semantics regression tests restored challenge fidelity.
+
 ## Reusable lesson
 
 Priority rules must be tested together, not only in isolation. A default-debt

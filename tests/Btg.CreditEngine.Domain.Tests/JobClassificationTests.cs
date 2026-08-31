@@ -46,6 +46,24 @@ public sealed class JobClassificationTests
     }
 
     [Fact]
+    public void CoordinatorFollowsLiteralSubstringPriority()
+    {
+        Assert.Equal("EXECUTIVE", JobClassifier.Classify("Coordinator").Id);
+    }
+
+    [Fact]
+    public void SeniorDirectorStillUsesExecutivePriority()
+    {
+        Assert.Equal("EXECUTIVE", JobClassifier.Classify("Senior Director").Id);
+    }
+
+    [Fact]
+    public void JuniorEngineerUsesTheHigherMidProfessionalPriority()
+    {
+        Assert.Equal("MID_PROFESSIONAL", JobClassifier.Classify("Junior Engineer").Id);
+    }
+
+    [Fact]
     public void NullOrBlankTitleUsesOtherCategory()
     {
         Assert.Equal("OTHER", JobClassifier.Classify(null).Id);

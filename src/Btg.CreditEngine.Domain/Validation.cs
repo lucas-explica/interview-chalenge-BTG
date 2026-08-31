@@ -86,20 +86,6 @@ public static class CustomerValidator
             }
         }
 
-        if (customer.HasMarketDebt == true && customer.MarketDebtTypes.Count == 0)
-        {
-            errors.Add(new("market_debt_types", "At least one debt type is required when has_market_debt is true."));
-        }
-
-        if (customer.HasMarketDebt == false && customer.MarketDebtTypes.Count > 0)
-        {
-            errors.Add(new("has_market_debt", "Must be true when market_debt_types is not empty."));
-        }
-
-        if (customer.MarketDebtTypes.Count != customer.MarketDebtTypes.Distinct(StringComparer.Ordinal).Count())
-        {
-            errors.Add(new("market_debt_types", "Debt types must not be duplicated."));
-        }
     }
 
     private static void ValidateLocation(LocationInput? location, ICollection<ValidationError> errors)

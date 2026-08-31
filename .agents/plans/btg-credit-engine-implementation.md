@@ -138,9 +138,9 @@ classification.
 - [x] Define domain input types for all required customer and location fields,
       plus the documented debt-type values.
 - [x] Define validation rules justified by the schema and challenge (required
-      fields, score range, valid region/debt values, coherent debt flags and
-      collections where the contract requires it); do not invent business
-      restrictions not supported by the requirements.
+      fields, score range, valid region/debt values); validate
+      `has_market_debt` and `market_debt_types` independently and do not invent
+      consistency or uniqueness restrictions.
 - [x] Add API JSON mapping with the exact external field names and a documented
       400 error response.
 - [x] Tests: domain validation for missing, malformed, out-of-range, and valid

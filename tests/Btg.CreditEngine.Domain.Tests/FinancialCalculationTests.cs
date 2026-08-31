@@ -94,6 +94,7 @@ public sealed class FinancialCalculationTests
 
     [Theory]
     [InlineData(10_049, 10_000)]
+    [InlineData(10_050, 10_100)]
     [InlineData(10_051, 10_100)]
     [InlineData(10_100, 10_100)]
     public void RoundsToNearestHundred(decimal amount, decimal expected)
